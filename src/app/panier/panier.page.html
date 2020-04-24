@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Panier</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let article of panierService.panier">
+    <h1>{{article.pizza.nom}}</h1>
+    <p>{{article.nbre}}</p>
+    <p>{{article.nbre * article.pizza.prix}}</p>
+    <ion-icon name="remove-circle-outline" (click)="panierService.removeOnePizza(article.pizza)"></ion-icon>
+    <ion-icon name="add-circle-outline" (click)="panierService.addPizza(article.pizza)"></ion-icon>
+    <ion-icon name="trash-outline" (click)="panierService.removePizza(article.pizza)"></ion-icon>
+  </ion-card>
+  <ion-card >
+    <h1>Total : {{getPrice()}} €</h1>
+  </ion-card>
+</ion-content>

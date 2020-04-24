@@ -1,0 +1,7 @@
+
+<app-header [title]="pizza.nom"></app-header>
+<ion-content>
+    <ion-card *ngFor="let ingredient of ingredients">
+        <h3>{{ingredient.nom}}</h3>
+    </ion-card>
+</ion-content>

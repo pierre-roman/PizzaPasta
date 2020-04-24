@@ -25,3 +25,16 @@
 #container a {
   text-decoration: none;
 }
+
+#container[scrollx=true] {
+  overflow-x: auto;
+}
+
+#container[scrolly=true] {
+  overflow-y: auto;
+}
+
+.PizzaPhoto {
+  max-width: 200px;
+}
+
