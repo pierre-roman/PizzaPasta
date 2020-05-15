@@ -26,6 +26,10 @@ const routes: Routes = [
   {
     path: 'pizza-admin',
     loadChildren: () => import('./pizza-admin/pizza-admin.module').then( m => m.PizzaAdminPageModule)
+  },
+  {
+    path: 'ingredient-admin',
+    loadChildren: () => import('./ingredient-admin/ingredient-admin.module').then( m => m.IngredientAdminPageModule)
   }
 ];
 

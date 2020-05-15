@@ -5,6 +5,7 @@ import Ingredient from '../models/ingredient';
 import { IngredientService } from '../services/ingredient.service';
 import { PizzaService } from '../services/pizza.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-pizza-admin',
@@ -23,22 +24,28 @@ export class PizzaAdminPage implements OnInit {
   prix: number;
   ingredients: Array<number>;
 
+  subscribeIngredient: Subscription;
+
 
   constructor(private camera: Camera, private router: Router, private route : ActivatedRoute, private ingredientService: IngredientService, private pizzaService: PizzaService) { }
 
   ngOnInit() {
     this.route.params
     .subscribe((pizza) => {
-      this.ingredientService.getIngredient().subscribe(ingredients => this.listeIngredients = ingredients);
+      this.subscribeIngredient = this.ingredientService.getIngredient().subscribe(ingredients => this.listeIngredients = ingredients);
       if(Object.keys(pizza).length === 0){
         this.nom = "";
         this.photo = "";
-        this.prix = -1;
         this.ingredients = [];
         this.action = "new";
       }else{
+        this.id = pizza.id;
+        
+        this.nom = "";
+        this.photo = "";
+        this.ingredients = []
         this.pizzaService.getOnePizza(pizza.id).subscribe((myPizza) => {
-          this.id = myPizza.id;
+          console.log("myPizza", myPizza);
           this.nom = myPizza.nom;
           this.photo = myPizza.photo;
           this.prix = myPizza.prix;
@@ -47,6 +54,11 @@ export class PizzaAdminPage implements OnInit {
         this.action = "edit";
       }
     })
+  }
+
+  ionViewWillEnter(){
+    this.subscribeIngredient.unsubscribe();
+    this.subscribeIngredient = this.ingredientService.getIngredient().subscribe(ingredients => this.listeIngredients = ingredients);
   }
 
   checkSelect(ingredientId) {
@@ -63,15 +75,13 @@ export class PizzaAdminPage implements OnInit {
     if(index == -1){
       this.ingredients.push(ingredientId);
     }else {
-      console.log(index);
       this.ingredients.splice(index, 1)
     }
   }
 
   sendPizza(){
-    if(this.prix != -1 && this.nom.length > 0 && this.photo.length > 0 && this.ingredients.length > 0){
-      console.log("send Pizza");
-       
+    if(this.prix >= 0 && this.nom.length > 0 && this.photo.length > 0 && this.ingredients.length > 0){
+      
       switch (this.action) {
         case "new":
           this.pizzaService.postPizza(this.nom, this.photo, this.ingredients, this.prix).subscribe((newPizza) => {
@@ -81,13 +91,32 @@ export class PizzaAdminPage implements OnInit {
               this.router.navigate(['admin']);
             }
           }, (err) => {
-            this.error = err
+            this.error = "une erreur est survenu lors de l'ajout de la pizza";
             console.log(err);
           });
           break;
         case "edit":
+          var pizzaModify = new Pizza(this.id, this.nom, this.photo, this.prix, this.ingredients);
+          this.pizzaService.putPizza(pizzaModify).subscribe((updatePizza) => {
+            if(updatePizza.id){
+              this.router.navigate(['admin']);
+            }
+          }, (err) => {
+            this.error = "une erreur est survenu lors de la modification de la pizza";
+            console.log(err);
+          })
           break;
       }
+    }else {
+      this.error = "Veuillez completer correctement les champs";
+    }
+  }
+
+  deletePizza(){
+    if(this.action == "edit" && this.id){
+      this.pizzaService.deletePizza(this.id).subscribe(() => {
+        this.router.navigate(['admin']);
+      })
     }
   }
 

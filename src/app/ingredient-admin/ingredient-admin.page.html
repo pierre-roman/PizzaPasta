@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>ingredient-admin</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="stacked">Nom</ion-label>
+    <ion-input [(ngModel)]="nom"></ion-input>
+  </ion-item>
+  <ion-button *ngIf="action == 'new'" [disabled]="this.nom.length <= 0" color="primary" (click)="sendIngredient()">ajouter Pizza</ion-button>
+  <ion-button *ngIf="action == 'edit'" [disabled]="this.nom.length <= 0" color="primary" (click)="sendIngredient()">modifier Pizza</ion-button>
+  <ion-button *ngIf="action == 'edit'" color="danger" (click)="deleteIngredient()">Delete</ion-button>
+</ion-content>

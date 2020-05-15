@@ -11,7 +11,7 @@
       <ion-button [routerLink]="['/pizza-admin', {}]" routerLinkActive="router-link-active">ajouter pizza</ion-button>
     </ion-card-header>
     <ion-card-content>
-      <ion-card *ngFor="let pizza of listePizza">
+      <ion-card [routerLink]="['/pizza-admin', pizza]" *ngFor="let pizza of listePizza">
         <ion-card-header>
           <ion-card-title>{{pizza.nom}}</ion-card-title>
         </ion-card-header>
@@ -24,9 +24,10 @@
   <ion-card>
     <ion-card-header>
       <ion-card-title>Ingredient</ion-card-title>
+      <ion-button [routerLink]="['/ingredient-admin', {}]" routerLinkActive="router-link-active">ajouter ingredient</ion-button>
     </ion-card-header>
     <ion-card-content>
-      <ion-card *ngFor="let ingredient of listeIngredients">
+      <ion-card [routerLink]="['/ingredient-admin', ingredient]" *ngFor="let ingredient of listeIngredients">
         <ion-card-header>
           <ion-card-title>{{ingredient.nom}}</ion-card-title>
         </ion-card-header>
