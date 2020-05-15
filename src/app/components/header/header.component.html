@@ -4,8 +4,13 @@
       {{title}}
     </ion-title>
     <div>
-      <button id="notification-button" (click)="goToPanier()">
+      <button id="notification-button" class="buttonHeader" (click)="goToPanier()">
           <ion-badge id="notifications-badge" color="danger">{{panierSevice.getLength()}}</ion-badge>
+          <ion-icon name="notifications"></ion-icon>              
+      </button>
+    </div>
+    <div>
+      <button class="buttonHeader" (click)="goToAdmin()">
           <ion-icon name="notifications"></ion-icon>              
       </button>
     </div>

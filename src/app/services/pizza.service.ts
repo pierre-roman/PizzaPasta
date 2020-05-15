@@ -62,8 +62,8 @@ export class PizzaService {
         );
   }
 
-  postPizza(nom: string, image: string, ingredients: Array<Number>, prix: Number): Observable<Pizza> {
-    var pizza = {nom: nom, image: image, ingredients: ingredients, prix: prix}
+  postPizza(nom: string, photo: string, ingredients: Array<Number>, prix: Number): Observable<Pizza> {
+    var pizza = {nom: nom, photo: photo, ingredients: ingredients, prix: prix}
     return this.http.post<iPizza>('https://api.ynov.jcatania.io/pizza', pizza)
         .pipe(
             map(value => {
@@ -71,7 +71,7 @@ export class PizzaService {
               if (value) {
                 return value;
               } else {
-                throw new Error ('Aucune pizza trouvé');
+                throw new Error ('la pizza n\'a pas pu être créé');
               }
             }),
             map(value => new Pizza(value.id, value.nom, value.photo, value.prix, value.ingredients))

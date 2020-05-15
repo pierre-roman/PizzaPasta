@@ -8,7 +8,7 @@ import { PanierService } from '../services/panier.service';
 })
 export class PanierPage implements OnInit {
 
-  constructor(private panierService: PanierService) { }
+  constructor(protected panierService: PanierService) { }
   
   ngOnInit() {
   }

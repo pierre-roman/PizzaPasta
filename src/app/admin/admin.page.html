@@ -6,8 +6,31 @@
 
 <ion-content>
   <ion-card>
-    <ion-header-card>
-      Pizza
-    </ion-header-card>
+    <ion-card-header>
+      <ion-card-title>Pizza</ion-card-title>
+      <ion-button [routerLink]="['/pizza-admin', {}]" routerLinkActive="router-link-active">ajouter pizza</ion-button>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-card *ngFor="let pizza of listePizza">
+        <ion-card-header>
+          <ion-card-title>{{pizza.nom}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          {{pizza.prix}}
+        </ion-card-content>
+      </ion-card>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Ingredient</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-card *ngFor="let ingredient of listeIngredients">
+        <ion-card-header>
+          <ion-card-title>{{ingredient.nom}}</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+    </ion-card-content>
   </ion-card>
 </ion-content>

@@ -33,9 +33,10 @@ export class PanierService {
   }
 
   addPizza(pizza: Pizza){
+    
     var pizzaExist = this.checkInPanier(pizza);
-    if(pizzaExist){
-      this.panier[pizzaExist].nbre += 1
+    if(pizzaExist != -1){
+      this.panier[pizzaExist].nbre += 1;
     }
     else{
       var newPizzPos = this.panier.push({nbre: 1, pizza: pizza}) - 1;
@@ -44,8 +45,11 @@ export class PanierService {
   }
 
   removeOnePizza(pizza: Pizza){
+    
     var pizzaExist = this.checkInPanier(pizza);
-    if(pizzaExist){
+
+    
+    if(pizzaExist != -1){
       if(this.panier[pizzaExist].nbre - 1 > 0){
         this.panier[pizzaExist].nbre -= 1;
       }else{
@@ -56,19 +60,20 @@ export class PanierService {
 
   removePizza(pizza: Pizza){
     var pizzaExist = this.checkInPanier(pizza);
-    if(pizzaExist){
+    if(pizzaExist != -1){
       this.panier.splice(pizzaExist, 1);
       this.subcribedPizz[pizza.id].unsubscribe();
     }
   }
 
   checkInPanier(pizza: Pizza){
-    for(let i in this.panier){
+    for(let i = 0; i < this.panier.length ; i++){
+      
       if(this.panier[i].pizza.id == pizza.id){
         return i;
       }
     }
-    return false
+    return -1
   }
 
 }

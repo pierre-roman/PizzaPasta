@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import Pizza from '../models/pizza';
 import { switchMap } from 'rxjs/operators';
 import { IngredientService } from '../services/ingredient.service';
@@ -22,16 +22,18 @@ export class PizzaDetailPage implements OnInit {
   ngOnInit() {
     this.route.params
     .subscribe((pizza) => {
-      this.pizza = new Pizza(+pizza.id, pizza.nom, pizza.photo, +pizza.prix, pizza.ingredients.split(',').map(function(item) {
+      var tabIngredientId = pizza.ingredients.split(',').map(function(item) {
         return parseInt(item, 10);
-      }));
-      for(let i in pizza.ingredients){
-        this.ingredientService.getOneIngredient(pizza.ingredients[i]).subscribe((ingredient) => {
-          console.log("ingredient", ingredient)
+      })
+      
+      this.pizza = new Pizza(+pizza.id, pizza.nom, pizza.photo, +pizza.prix, tabIngredientId);
+      this.ingredients = [];
+      for(let i in this.pizza.ingredients){
+        
+        this.ingredientService.getOneIngredient(this.pizza.ingredients[i]).subscribe((ingredient) => {
           this.ingredients.push(ingredient);
         })
       }
-      console.log(this.pizza);
       // your data-specific code goes here
     });
   }

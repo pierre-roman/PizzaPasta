@@ -13,7 +13,7 @@ export class HomePage implements OnInit{
   error: string;
   loading: boolean;
 
-  constructor(private pizzaService : PizzaService, private panierService: PanierService) {
+  constructor(private pizzaService : PizzaService, protected panierService: PanierService) {
     this.loading = true;
     
   }

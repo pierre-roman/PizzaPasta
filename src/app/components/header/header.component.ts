@@ -11,12 +11,16 @@ export class HeaderComponent implements OnInit {
   @Input() title : string
   panier: Array<any>
 
-  constructor(private panierSevice: PanierService, private router: Router) {
+  constructor(protected panierSevice: PanierService, private router: Router) {
     this.panier = [];
   }
 
   goToPanier(){
     this.router.navigate(['/panier']);
+  }
+
+  goToAdmin(){
+    this.router.navigate(['/admin']);
   }
 
   ngOnInit() {

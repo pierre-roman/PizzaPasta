@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>pizza-admin</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="stacked">Nom</ion-label>
+    <ion-input [(ngModel)]="nom"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Prix</ion-label>
+    <ion-input [(ngModel)]="prix"></ion-input>
+  </ion-item>
+  <ion-item (click)="takePicture()">
+    <img *ngIf="photo.length > 0" [src]="photo">
+    <ion-button *ngIf="photo.length <= 0" color="primary">Prendre une photo</ion-button>
+  </ion-item>
+  <ion-card-content>
+    <ion-card *ngFor="let ingredient of listeIngredients">
+      <ion-card-header (click)="clickIngredient(ingredient.id)">
+        <ion-icon *ngIf="checkSelect(ingredient.id)" name="checkmark"></ion-icon>
+        <ion-card-title>{{ingredient.nom}}</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+  </ion-card-content>
+  <span>{{error}}</span>
+  <ion-button [disabled]="this.prix == -1 || this.nom.length <= 0 || this.ingredients.length <= 0" color="primary" (click)="sendPizza()">ajouter Pizza</ion-button>
+  <ion-button *ngIf="action == 'edit'" color="danger" (click)="sendPizza()">Delete</ion-button>
+</ion-content>
