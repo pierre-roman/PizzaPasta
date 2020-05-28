@@ -1,21 +1,37 @@
-#notification-button {            
-    position: relative;
+#notification-button {       
     width: 42px;
     top:1px;
     right: 1px;
-    overflow: visible!important;
-  }
+}
   
-  button {
+button {
     #notifications-badge {
       & ~ ion-icon {
         margin-right: 1.2rem;
       }
     }
     .buttonHeader {
-      position: absolute;
       top: -0.2rem;
       right: -0.2rem;
       opacity: 0.9;
     }
-  }
+}
+
+.navBarre {
+  display: flex;
+  flex-direction: row;
+  padding: 2%;
+}
+
+.titleArea{
+  flex: 1;
+}
+
+.buttonArea {
+  display: flex;
+  flex-direction: row;
+}
+
+.buttonNotif {
+  flex: 1;
+}

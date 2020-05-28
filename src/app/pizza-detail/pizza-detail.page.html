@@ -1,6 +1,11 @@
 
 <app-header [title]="pizza.nom"></app-header>
 <ion-content>
+    <img src={{pizza.photo}}/>
+    <ion-card>
+        <h2>{{pizza.prix}} €</h2>
+        <ion-button class="buttonPizza" (click)="panierService.addPizza(pizza)">ajout panier</ion-button>
+    </ion-card>
     <ion-card *ngFor="let ingredient of ingredients">
         <h3>{{ingredient.nom}}</h3>
     </ion-card>

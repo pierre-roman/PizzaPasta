@@ -1,18 +1,25 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      {{title}}
-    </ion-title>
-    <div>
-      <button id="notification-button" class="buttonHeader" (click)="goToPanier()">
-          <ion-badge id="notifications-badge" color="danger">{{panierSevice.getLength()}}</ion-badge>
-          <ion-icon name="notifications"></ion-icon>              
-      </button>
-    </div>
-    <div>
-      <button class="buttonHeader" (click)="goToAdmin()">
-          <ion-icon name="notifications"></ion-icon>              
-      </button>
+    <div class="navBarre">
+      <div class="titleArea">
+        <ion-title >
+          {{title}}
+        </ion-title>
+      </div>
+     
+      <div class="buttonArea">
+        <div class="buttonNotif">
+          <button id="notification-button" class="buttonHeader" (click)="goToPanier()">
+            <ion-badge id="notifications-badge" color="danger">{{panierSevice.getLength()}}</ion-badge>
+            <ion-icon name="notifications"></ion-icon>              
+          </button>
+        </div>
+        <div class="buttonNotif">
+          <button class="buttonHeader" (click)="goToAdmin()">     
+            <ion-icon name="person-circle"></ion-icon>        
+          </button>
+        </div>
+      </div>
     </div>
   </ion-toolbar>
 </ion-header>

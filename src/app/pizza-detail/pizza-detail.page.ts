@@ -4,6 +4,7 @@ import Pizza from '../models/pizza';
 import { switchMap } from 'rxjs/operators';
 import { IngredientService } from '../services/ingredient.service';
 import Ingredient from '../models/ingredient';
+import { PanierService } from '../services/panier.service';
 
 @Component({
   selector: 'app-pizza-detail',
@@ -15,7 +16,7 @@ export class PizzaDetailPage implements OnInit {
   pizza: Pizza;
   ingredients: Array<Ingredient>;
 
-  constructor(private route : ActivatedRoute, private ingredientService: IngredientService) { 
+  constructor(private route : ActivatedRoute, private ingredientService: IngredientService, protected panierService: PanierService) { 
     this.ingredients = [];
    }
 

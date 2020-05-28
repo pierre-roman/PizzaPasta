@@ -3,19 +3,22 @@
   
 
 <ion-content>
-
-  <div id="container">
+  <div class="container">
     <img *ngIf="loading" src="../../assets/image/Loading.png"/>
-    <ion-card *ngFor="let pizza of pizzaListe">
-      <ion-card-header>
-        <ion-card-title>{{pizza.nom}}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <img class="PizzaPhoto" src={{pizza.photo}}/>
-        {{pizza.prix}}
-        <ion-button (click)="panierService.addPizza(pizza)">ajout panier</ion-button>
-        <ion-button [routerLink]="['/pizza-detail', pizza]" routerLinkActive="router-link-active">voir detail</ion-button>
-      </ion-card-content>
+    <ion-card *ngFor="let pizza of pizzaListe" class="cardPizza">
+        <div class="PizzaPhoto">
+          <img src={{pizza.photo}}/>
+        </div>
+        <div class="contentPizzaCard">
+          <div class="titlePizzaArea">
+            <ion-card-title class="titre">{{pizza.nom}}</ion-card-title>
+            <div style="color:white">{{pizza.prix}} €</div>
+          </div>
+          <div class="buttonPizzaArea">
+            <ion-button class="buttonPizza" (click)="panierService.addPizza(pizza)">ajout panier</ion-button>
+            <ion-button class="buttonPizza" [routerLink]="['/pizza-detail', pizza]" routerLinkActive="router-link-active">voir detail</ion-button>
+          </div>
+        </div>
     </ion-card>
   </div>
 </ion-content>
